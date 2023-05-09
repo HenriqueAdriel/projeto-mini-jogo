@@ -12,21 +12,19 @@ const jump = () => {
 
 const loop = setInterval(() => {
 
-    const pipePosition = pipe.offsetleft;
-    const marioPosition = window.getComputedStyle(mario).bottom;
+    const pipePosition = pipe.offsetLeft;
 
-    if (pipePosition <= 120 && pipePosition > 0 && marioPosition <80) {
-        
-        pipe.style.animation = 'none';
-        pipe.style.left = `${pipePosition}px`;
+    const marioPosition = parseInt(getComputedStyle(mario).bottom);
 
-        mario.style.animation = 'none';
-        mario.style.bottom = `${marioPosition}px`;    
-
-        mario.src ='./imagens/game-over.png';
-
-}
-
+  if (pipePosition > 0 && pipePosition < 150 && marioPosition < 80) {
+    clearInterval(loop);
+    pipe.style.animation = "none";
+    mario.style.animation = "none";
+    mario.src = "./imagens/game-over.png";
+    mario.style.width = '75px'
+    mario.style.marginLeft = '50px'
+    clearInterval(loop);
+  }
 }, 10);
 
 document.addEventListener('keydown', jump);
